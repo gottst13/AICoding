@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartparking.parking.mapper.ParkingZoneMapper">
+
+    <resultMap id="BaseResultMap" type="com.smartparking.parking.entity.ParkingZone">
+        <id column="id" property="id"/>
+        <result column="parking_lot_id" property="parkingLotId"/>
+        <result column="parent_zone_id" property="parentZoneId"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="zone_type" property="zoneType"/>
+        <result column="zone_category" property="zoneCategory"/>
+        <result column="floor_level" property="floorLevel"/>
+        <result column="total_spaces" property="totalSpaces"/>
+        <result column="available_spaces" property="availableSpaces"/>
+        <result column="has_independent_exit" property="hasIndependentExit"/>
+        <result column="exit_lane_ids" property="exitLaneIds" 
+                typeHandler="org.apache.ibatis.type.ArrayTypeHandler"/>
+        <result column="status" property="status"/>
+        <result column="config" property="config" 
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <!-- 查询停车场的所有区域（树形结构） -->
+    <select id="selectZoneTree" resultMap="BaseResultMap">
+        SELECT * FROM parking_zones
+        WHERE parking_lot_id = #{parkingLotId}
+          AND status != 0
+        ORDER BY zone_type ASC, code ASC
+    </select>
+
+    <!-- 查询区域的所有子区域 -->
+    <select id="selectChildZones" resultMap="BaseResultMap">
+        SELECT * FROM parking_zones
+        WHERE parent_zone_id = #{parentZoneId}
+          AND status != 0
+        ORDER BY code ASC
+    </select>
+
+    <!-- 更新区域可用车位数 -->
+    <update id="incrementAvailableSpaces">
+        UPDATE parking_zones
+        SET available_spaces = available_spaces + #{delta},
+            updated_at = NOW()
+        WHERE id = #{zoneId}
+          AND available_spaces + #{delta} >= 0
+    </update>
+
+</mapper>

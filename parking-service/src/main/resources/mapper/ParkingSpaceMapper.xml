@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartparking.parking.mapper.ParkingSpaceMapper">
+
+    <resultMap id="BaseResultMap" type="com.smartparking.parking.entity.ParkingSpace">
+        <id column="id" property="id"/>
+        <result column="zone_id" property="zoneId"/>
+        <result column="space_no" property="spaceNo"/>
+        <result column="space_type" property="spaceType"/>
+        <result column="location_info" property="locationInfo" 
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result column="status" property="status"/>
+        <result column="occupied_by_plate" property="occupiedByPlate"/>
+        <result column="occupied_since" property="occupiedSince"/>
+        <result column="is_charging" property="isCharging"/>
+        <result column="charging_device_id" property="chargingDeviceId"/>
+        <result column="width_cm" property="widthCm"/>
+        <result column="length_cm" property="lengthCm"/>
+        <result column="height_limit_cm" property="heightLimitCm"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <!-- 查询区域的空闲车位 -->
+    <select id="selectAvailableSpaces" resultMap="BaseResultMap">
+        SELECT * FROM parking_spaces
+        WHERE zone_id = #{zoneId}
+          AND status = 1
+        ORDER BY space_no
+    </select>
+
+    <!-- 根据车位编号查询 -->
+    <select id="selectBySpaceNo" resultMap="BaseResultMap">
+        SELECT * FROM parking_spaces
+        WHERE zone_id = #{zoneId}
+          AND space_no = #{spaceNo}
+        LIMIT 1
+    </select>
+
+    <!-- 批量插入车位 -->
+    <insert id="batchInsert">
+        INSERT INTO parking_spaces (zone_id, space_no, space_type, status, created_at, updated_at)
+        VALUES
+        <foreach collection="spaces" item="space" separator=",">
+            (#{space.zoneId}, #{space.spaceNo}, #{space.spaceType}, #{space.status}, NOW(), NOW())
+        </foreach>
+    </insert>
+
+</mapper>
