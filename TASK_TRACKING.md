@@ -85,10 +85,17 @@
 - **备注**: 完整的 CRUD 服务，支持树形查询、层级验证
 
 ### Task 2.4: Controller 层实现
-- **状态**: ⏹️ PENDING
-- **文件**: `parking-service/src/main/java/com/smartparking/parking/controller/ParkingZoneController.java`
+- **状态**: ✅ COMPLETE
+- **文件**: 
+  - `parking-service/src/main/java/com/smartparking/parking/controller/ParkingZoneController.java`
+  - `parking-service/src/main/java/com/smartparking/common/response/ApiResponse.java`
+  - `parking-service/src/main/java/com/smartparking/common/exception/BusinessException.java`
+  - `parking-service/src/main/java/com/smartparking/common/exception/GlobalExceptionHandler.java`
 - **预计工时**: 4 小时
-- **Git Commit**: 
+- **实际开始**: 2026-03-31
+- **实际完成**: 2026-03-31
+- **Git Commit**: `f5df017` feat: 创建 Controller 层和异常处理（Task 2.4 完成）
+- **备注**: RESTful API，统一响应封装，全局异常处理
 
 ### Task 2.5: 前端区域管理页面
 - **状态**: ⏹️ PENDING
@@ -177,10 +184,10 @@
 | Sprint | 总任务数 | 已完成 | 进行中 | 未开始 | 完成率 |
 |--------|----------|--------|--------|--------|--------|
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
-| Sprint 2 | 6 | **3** | 0 | 3 | **50%** |
+| Sprint 2 | 6 | **4** | 0 | 2 | **67%** |
 | Sprint 3 | 6 | 0 | 0 | 6 | 0% |
 | Sprint 4 | 6 | 0 | 0 | 6 | 0% |
-| **总计** | **21** | **6** | **0** | **15** | **29%** |
+| **总计** | **21** | **7** | **0** | **14** | **33%** |
 
 ---
 
