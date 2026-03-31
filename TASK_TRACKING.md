@@ -49,12 +49,15 @@
 ## Sprint 2: 区域管理功能（Week 3-4）
 
 ### Task 2.1: 实体类创建
-- **状态**: ⏹️ PENDING
+- **状态**: ✅ COMPLETE
 - **文件**: 
   - `parking-service/src/main/java/com/smartparking/parking/entity/ParkingZone.java`
   - `parking-service/src/main/java/com/smartparking/parking/entity/ParkingSpace.java`
 - **预计工时**: 4 小时
-- **Git Commit**: 
+- **实际开始**: 2026-03-31
+- **实际完成**: 2026-03-31
+- **Git Commit**: `e4f518f` feat: 创建区域和车位实体类（Task 2.1 完成）
+- **备注**: 使用 MyBatis Plus 注解，Lombok 简化代码
 
 ### Task 2.2: Mapper 接口创建
 - **状态**: ⏹️ PENDING
@@ -168,10 +171,10 @@
 | Sprint | 总任务数 | 已完成 | 进行中 | 未开始 | 完成率 |
 |--------|----------|--------|--------|--------|--------|
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
-| Sprint 2 | 6 | 0 | 0 | 6 | 0% |
+| Sprint 2 | 6 | **1** | 0 | 5 | **17%** |
 | Sprint 3 | 6 | 0 | 0 | 6 | 0% |
 | Sprint 4 | 6 | 0 | 0 | 6 | 0% |
-| **总计** | **21** | **3** | **0** | **18** | **14%** |
+| **总计** | **21** | **4** | **0** | **17** | **19%** |
 
 ---
 
