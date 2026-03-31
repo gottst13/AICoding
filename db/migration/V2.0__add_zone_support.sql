@@ -137,9 +137,122 @@ $$ LANGUAGE plpgsql;
 COMMENT ON FUNCTION update_zone_available_spaces() IS '自动更新区域可用车位数';
 
 -- 注意：此触发器将在车位表创建后生效
--- CREATE TRIGGER trg_update_zone_spaces
--- AFTER INSERT OR DELETE OR UPDATE ON parking_spaces
--- FOR EACH ROW EXECUTE FUNCTION update_zone_available_spaces();
+CREATE TRIGGER trg_update_zone_spaces
+AFTER INSERT OR DELETE OR UPDATE ON parking_spaces
+FOR EACH ROW EXECUTE FUNCTION update_zone_available_spaces();
+
+
+-- =====================================================
+-- 6. 创建车位表
+-- =====================================================
+
+CREATE TABLE parking_spaces (
+    id BIGSERIAL PRIMARY KEY,
+    zone_id BIGINT NOT NULL REFERENCES parking_zones(id) ON DELETE CASCADE,
+    space_no VARCHAR(20) NOT NULL,      -- 车位编号，如"A-001"、"B1-023"
+    space_type SMALLINT NOT NULL DEFAULT 1,  -- 1:小型车 2:大型车 3:无障碍 4:充电车位
+    location_info JSONB,                -- {"x": 10, "y": 20, "direction": "N"}
+    
+    -- 状态
+    status SMALLINT NOT NULL DEFAULT 1, -- 0:占用 1:空闲 2:锁定 3:预约
+    occupied_by_plate VARCHAR(20),      -- 当前停放车牌号
+    occupied_since TIMESTAMPTZ,         -- 占用开始时间
+    
+    -- 属性
+    is_charging BOOLEAN DEFAULT false,
+    charging_device_id BIGINT,
+    width_cm INTEGER,                   -- 车位宽度（厘米）
+    length_cm INTEGER,                  -- 车位长度
+    height_limit_cm INTEGER,            -- 限高
+    
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    -- 约束
+    UNIQUE(zone_id, space_no)
+);
+
+COMMENT ON TABLE parking_spaces IS '车位表';
+COMMENT ON COLUMN parking_spaces.space_type IS '1:小型车 2:大型车 3:无障碍 4:充电车位';
+COMMENT ON COLUMN parking_spaces.status IS '0:占用 1:空闲 2:锁定 3:预约';
+COMMENT ON COLUMN parking_spaces.location_info IS '车位位置信息（JSON 格式）';
+
+
+-- =====================================================
+-- 7. 创建车位表索引
+-- =====================================================
+
+CREATE INDEX idx_spaces_zone_id ON parking_spaces(zone_id);
+CREATE INDEX idx_spaces_status ON parking_spaces(status);
+CREATE INDEX idx_spaces_plate ON parking_spaces(occupied_by_plate) 
+    WHERE occupied_by_plate IS NOT NULL;
+
+
+-- =====================================================
+-- 8. 修改订单表：增加区域相关字段
+-- =====================================================
+
+ALTER TABLE orders
+ADD COLUMN parking_lot_id BIGINT REFERENCES parking_lots(id),
+ADD COLUMN initial_zone_id BIGINT REFERENCES parking_zones(id),
+ADD COLUMN current_zone_id BIGINT REFERENCES parking_zones(id),
+ADD COLUMN fee_mode SMALLINT NOT NULL DEFAULT 1,
+ADD COLUMN fee_rule_snapshot JSONB,
+ADD COLUMN has_cross_zone BOOLEAN DEFAULT false,
+ADD COLUMN cross_zone_count INTEGER DEFAULT 0;
+
+COMMENT ON COLUMN orders.parking_lot_id IS '停车场 ID';
+COMMENT ON COLUMN orders.initial_zone_id IS '首次进入区域 ID';
+COMMENT ON COLUMN orders.current_zone_id IS '当前所在区域 ID';
+COMMENT ON COLUMN orders.fee_mode IS '计费模式：1-统一计费 2-分区计费';
+COMMENT ON COLUMN orders.fee_rule_snapshot IS '计费规则快照（JSON 格式）';
+COMMENT ON COLUMN orders.has_cross_zone IS '是否有跨区移动';
+COMMENT ON COLUMN orders.cross_zone_count IS '跨区次数';
+
+-- 创建订单表索引
+CREATE INDEX idx_orders_zone ON orders(initial_zone_id, current_zone_id);
+CREATE INDEX idx_orders_parking_lot ON orders(parking_lot_id);
+
+
+-- =====================================================
+-- 9. 创建订单分段明细表（用于分区计费）
+-- =====================================================
+
+CREATE TABLE order_segments (
+    id BIGSERIAL PRIMARY KEY,
+    order_no VARCHAR(32) NOT NULL REFERENCES orders(order_no) ON DELETE CASCADE,
+    segment_no INTEGER NOT NULL,         -- 分段序号，从 1 开始
+    
+    -- 区域信息
+    zone_id BIGINT NOT NULL REFERENCES parking_zones(id),
+    zone_name VARCHAR(50) NOT NULL,      -- 冗余存储，避免关联查询
+    
+    -- 时间信息
+    enter_time TIMESTAMPTZ NOT NULL,
+    exit_time TIMESTAMPTZ NOT NULL,
+    duration_minutes INTEGER NOT NULL,
+    
+    -- 计费信息
+    fee_rule_id BIGINT REFERENCES fee_rules(id),
+    fee_rule_snapshot JSONB NOT NULL,    -- 计费规则快照
+    fee_amount DECIMAL(10,2) NOT NULL,
+    
+    -- 备注
+    remark VARCHAR(200),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+COMMENT ON TABLE order_segments IS '订单分段明细表';
+COMMENT ON COLUMN order_segments.segment_no IS '分段序号，从 1 开始';
+COMMENT ON COLUMN order_segments.fee_rule_snapshot IS '计费规则快照（JSON 格式）';
+
+-- 创建订单分段表索引
+CREATE INDEX idx_order_segments_order_no ON order_segments(order_no);
+CREATE INDEX idx_order_segments_zone_id ON order_segments(zone_id);
+CREATE UNIQUE INDEX idx_order_segments_unique ON order_segments(order_no, segment_no);
+
+-- 添加约束
+ALTER TABLE order_segments ADD CONSTRAINT chk_segment_no CHECK (segment_no > 0);
 
 
 -- =====================================================
