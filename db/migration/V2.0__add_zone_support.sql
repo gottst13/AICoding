@@ -256,6 +256,80 @@ ALTER TABLE order_segments ADD CONSTRAINT chk_segment_no CHECK (segment_no > 0);
 
 
 -- =====================================================
+-- 10. 创建车辆移动轨迹表
+-- =====================================================
+
+CREATE TABLE vehicle_movements (
+    id BIGSERIAL PRIMARY KEY,
+    movement_no VARCHAR(32) UNIQUE NOT NULL,
+    
+    -- 关联信息
+    order_no VARCHAR(32) NOT NULL REFERENCES orders(order_no),
+    plate_no VARCHAR(20) NOT NULL,
+    
+    -- 移动信息
+    from_zone_id BIGINT REFERENCES parking_zones(id),  -- NULL 表示入场
+    to_zone_id BIGINT NOT NULL REFERENCES parking_zones(id),
+    movement_time TIMESTAMPTZ NOT NULL,
+    
+    -- 检测设备
+    detected_by_device_id BIGINT,
+    detected_by_lane_id BIGINT,
+    snapshot_image_url VARCHAR(255),
+    snapshot_video_url VARCHAR(255),
+    
+    -- 移动类型
+    movement_type SMALLINT NOT NULL,     -- 1:入场 2:跨区移动 3:出场
+    movement_reason SMALLINT,            -- 1:主动移动 2:调度引导 3:误入纠正
+    
+    -- 置信度
+    confidence DECIMAL(3,2) DEFAULT 1.0, -- 识别置信度 0.00-1.00
+    
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+COMMENT ON TABLE vehicle_movements IS '车辆移动轨迹表';
+COMMENT ON COLUMN vehicle_movements.movement_type IS '1:入场 2:跨区移动 3:出场';
+COMMENT ON COLUMN vehicle_movements.from_zone_id IS '起始区域 ID（NULL 表示入场）';
+COMMENT ON COLUMN vehicle_movements.confidence IS '识别置信度 0.00-1.00';
+
+
+-- =====================================================
+-- 11. 创建车辆移动表索引
+-- =====================================================
+
+CREATE INDEX idx_movements_order_no ON vehicle_movements(order_no);
+CREATE INDEX idx_movements_plate_time ON vehicle_movements(plate_no, movement_time);
+CREATE INDEX idx_movements_zone ON vehicle_movements(to_zone_id, movement_time);
+
+
+-- =====================================================
+-- 12. 创建触发器：自动更新订单的跨区信息
+-- =====================================================
+
+CREATE OR REPLACE FUNCTION update_order_cross_zone_info()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.movement_type = 2 THEN  -- 跨区移动
+        UPDATE orders 
+        SET has_cross_zone = true,
+            cross_zone_count = cross_zone_count + 1,
+            current_zone_id = NEW.to_zone_id,
+            updated_at = NOW()
+        WHERE order_no = NEW.order_no;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+COMMENT ON FUNCTION update_order_cross_zone_info() IS '自动更新订单的跨区信息';
+
+CREATE TRIGGER trg_update_order_movement
+AFTER INSERT ON vehicle_movements
+FOR EACH ROW EXECUTE FUNCTION update_order_cross_zone_info();
+
+
+-- =====================================================
 -- 迁移完成验证
 -- =====================================================
 
