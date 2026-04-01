@@ -216,9 +216,18 @@
 - **备注**: 支持跨区停车的分段计费，各区域独立计算费用
 
 ### Task 4.2: 车辆移动记录 Service
-- **状态**: ⏹️ PENDING
+- **状态**: ✅ COMPLETE
+- **文件**: 
+  - `order-service/src/main/java/com/smartparking/order/entity/OrderSegment.java`
+  - `order-service/src/main/java/com/smartparking/order/mapper/OrderSegmentMapper.java`
+  - `order-service/src/main/java/com/smartparking/order/repository/OrderSegmentRepository.java`
+  - `order-service/src/main/java/com/smartparking/order/service/OrderSegmentService.java`
+  - `order-service/src/main/java/com/smartparking/order/service/impl/OrderSegmentServiceImpl.java`
 - **预计工时**: 6 小时
-- **Git Commit**: 
+- **实际开始**: 2026-04-01
+- **实际完成**: 2026-04-01
+- **Git Commit**: `2dacce5` feat: 创建车辆移动记录 Service（Task 4.2 完成）
+- **备注**: 支持车辆进入/离开区域的自动分段记录
 
 ### Task 4.3: 订单分段处理
 - **状态**: ⏹️ PENDING
@@ -249,8 +258,8 @@
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
 | Sprint 2 | 6 | **6** | 0 | 0 | **100%** |
 | Sprint 3 | 6 | **6** | 0 | 0 | **100%** |
-| Sprint 4 | 6 | **1** | 0 | 5 | **17%** |
-| **总计** | **21** | **16** | **0** | **5** | **76%** |
+| Sprint 4 | 6 | **2** | 0 | 4 | **33%** |
+| **总计** | **21** | **17** | **0** | **4** | **81%** |
 
 ---
 
