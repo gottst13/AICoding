@@ -162,9 +162,19 @@
 - **备注**: 完整的 CRUD 接口，支持统一计费和分区计费规则
 
 ### Task 3.4: 费用试算接口
-- **状态**: ⏹️ PENDING
+- **状态**: ✅ COMPLETE
+- **文件**: 
+  - `order-service/src/main/java/com/smartparking/order/dto/FeeCalculationRequest.java`
+  - `order-service/src/main/java/com/smartparking/order/dto/FeeCalculationVO.java`
+  - `order-service/src/main/java/com/smartparking/order/dto/FeeDetailVO.java`
+  - `order-service/src/main/java/com/smartparking/order/service/FeeCalculationService.java`
+  - `order-service/src/main/java/com/smartparking/order/service/impl/FeeCalculationServiceImpl.java`
+  - `order-service/src/main/java/com/smartparking/order/controller/FeeCalculationController.java`
 - **预计工时**: 4 小时
-- **Git Commit**: 
+- **实际开始**: 2026-04-01
+- **实际完成**: 2026-04-01
+- **Git Commit**: `81e92e2` feat: 创建费用试算接口（Task 3.4 完成）
+- **备注**: 支持统一计费模式的费用试算，包含详细的费用明细
 
 ### Task 3.5: 前端车位管理页面
 - **状态**: ⏹️ PENDING
@@ -218,9 +228,9 @@
 |--------|----------|--------|--------|--------|--------|
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
 | Sprint 2 | 6 | **6** | 0 | 0 | **100%** |
-| Sprint 3 | 6 | **3** | 0 | 3 | **50%** |
+| Sprint 3 | 6 | **4** | 0 | 2 | **67%** |
 | Sprint 4 | 6 | 0 | 0 | 6 | 0% |
-| **总计** | **21** | **12** | **0** | **9** | **57%** |
+| **总计** | **21** | **13** | **0** | **8** | **62%** |
 
 ---
 
