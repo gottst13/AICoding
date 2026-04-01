@@ -190,9 +190,15 @@
 - **Git Commit**: 
 
 ### Task 3.6: 单元测试
-- **状态**: ⏹️ PENDING
+- **状态**: ✅ COMPLETE
+- **文件**: 
+  - `parking-service/src/test/java/com/smartparking/parking/service/ParkingSpaceServiceTest.java`
+  - `order-service/src/test/java/com/smartparking/order/service/FeeCalculationServiceTest.java`
 - **预计工时**: 4 小时
-- **Git Commit**: 
+- **实际开始**: 2026-04-01
+- **实际完成**: 2026-04-01
+- **Git Commit**: `45e18dc` test: 添加车位管理和费用计算单元测试（Task 3.6 完成）
+- **备注**: JUnit5+Mockito，覆盖核心业务逻辑
 
 ---
 
@@ -236,9 +242,9 @@
 |--------|----------|--------|--------|--------|--------|
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
 | Sprint 2 | 6 | **6** | 0 | 0 | **100%** |
-| Sprint 3 | 6 | **5** | 0 | 1 | **83%** |
+| Sprint 3 | 6 | **6** | 0 | 0 | **100%** |
 | Sprint 4 | 6 | 0 | 0 | 6 | 0% |
-| **总计** | **21** | **14** | **0** | **7** | **67%** |
+| **总计** | **21** | **15** | **0** | **6** | **71%** |
 
 ---
 
