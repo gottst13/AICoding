@@ -230,9 +230,17 @@
 - **备注**: 支持车辆进入/离开区域的自动分段记录
 
 ### Task 4.3: 订单分段处理
-- **状态**: ⏹️ PENDING
-- **预计工时**: 4 小时
-- **Git Commit**: 
+- **状态**: ✅ COMPLETE
+- **文件**: 
+  - `order-service/src/main/java/com/smartparking/order/entity/ParkingOrder.java`
+  - `order-service/src/main/java/com/smartparking/order/mapper/ParkingOrderMapper.java`
+  - `order-service/src/main/java/com/smartparking/order/service/ParkingOrderService.java`
+  - `order-service/src/main/java/com/smartparking/order/service/impl/ParkingOrderServiceImpl.java`
+- **预计工时**: 6 小时
+- **实际开始**: 2026-04-01
+- **实际完成**: 2026-04-01
+- **Git Commit**: `ddddf7f` feat: 创建订单分段处理服务（Task 4.3 完成）
+- **备注**: 支持订单创建、计费模式切换、分段费用计算
 
 ### Task 4.4: 全链路集成测试
 - **状态**: ⏹️ PENDING
@@ -258,8 +266,8 @@
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
 | Sprint 2 | 6 | **6** | 0 | 0 | **100%** |
 | Sprint 3 | 6 | **6** | 0 | 0 | **100%** |
-| Sprint 4 | 6 | **2** | 0 | 4 | **33%** |
-| **总计** | **21** | **17** | **0** | **4** | **81%** |
+| Sprint 4 | 6 | **3** | 0 | 3 | **50%** |
+| **总计** | **21** | **18** | **0** | **3** | **86%** |
 
 ---
 
