@@ -133,9 +133,18 @@
 - **备注**: 完整的车位 CRUD 服务，支持批量创建、占用、释放
 
 ### Task 3.2: 统一计费策略实现
-- **状态**: ⏹️ PENDING
-- **预计工时**: 6 小时
-- **Git Commit**: 
+- **状态**: ✅ COMPLETE
+- **文件**: 
+  - `order-service/src/main/java/com/smartparking/order/service/fee/strategy/FeeStrategy.java`
+  - `order-service/src/main/java/com/smartparking/order/service/fee/strategy/FeeResult.java`
+  - `order-service/src/main/java/com/smartparking/order/service/fee/strategy/FeeDetail.java`
+  - `order-service/src/main/java/com/smartparking/order/service/fee/strategy/UnifiedFeeStrategy.java`
+  - `order-service/src/main/java/com/smartparking/order/context/ParkingContext.java`
+- **预计工时**: 8 小时
+- **实际开始**: 2026-04-01
+- **实际完成**: 2026-04-01
+- **Git Commit**: `738fe04` feat: 创建统一计费策略（Task 3.2 完成）
+- **备注**: 策略模式实现，支持免费时长、封顶价格
 
 ### Task 3.3: 计费规则配置 API
 - **状态**: ⏹️ PENDING
@@ -199,9 +208,9 @@
 |--------|----------|--------|--------|--------|--------|
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
 | Sprint 2 | 6 | **6** | 0 | 0 | **100%** |
-| Sprint 3 | 6 | **1** | 0 | 5 | **17%** |
+| Sprint 3 | 6 | **2** | 0 | 4 | **33%** |
 | Sprint 4 | 6 | 0 | 0 | 6 | 0% |
-| **总计** | **21** | **10** | **0** | **11** | **48%** |
+| **总计** | **21** | **11** | **0** | **10** | **52%** |
 
 ---
 
