@@ -1,9 +1,11 @@
 package com.smartparking.parking.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * 停车区域实体类
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
  * @since 1.0.0
  */
 @Data
+@Builder
 @TableName("parking_zones")
 public class ParkingZone {
 
@@ -70,6 +73,16 @@ public class ParkingZone {
      * 是否有独立出口
      */
     private Boolean hasIndependentExit;
+    
+    /**
+     * 出口车道 ID 数组
+     */
+    private Long[] exitLaneIds;
+    
+    /**
+     * 扩展配置 (JSON)
+     */
+    private Map<String, Object> config;
 
     /**
      * 状态：0-停用 1-启用

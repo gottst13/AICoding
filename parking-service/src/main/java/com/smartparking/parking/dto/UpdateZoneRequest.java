@@ -2,7 +2,7 @@ package com.smartparking.parking.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import java.util.Map;
 
 /**

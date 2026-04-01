@@ -7,13 +7,15 @@ module.exports = {
   devServer: {
     port: 8082,
     open: true,
-    overlay: {
-      warnings: false,
-      errors: true
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true
+      }
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8081',  // 用户服务端口
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

@@ -7,8 +7,8 @@
 
     <parent>
         <groupId>com.smartparking</groupId>
-        <artifactId>smart-parking-platform</artifactId>
-        <version>2.0.0</version>
+        <artifactId>smart-parking-parent</artifactId>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>parking-service</artifactId>
@@ -39,6 +39,19 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+        
+        <!-- Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        
+        <!-- Swagger (SpringDoc for Spring Boot 3.x) -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.3.0</version>
         </dependency>
 
         <!-- Common Module -->

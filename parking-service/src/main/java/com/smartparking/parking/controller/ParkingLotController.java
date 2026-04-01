@@ -3,8 +3,8 @@ package com.smartparking.parking.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.smartparking.parking.entity.ParkingLot;
 import com.smartparking.parking.service.ParkingLotService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/parking-lots")
-@Api(tags = "停车场管理接口")
+@Tag(name = "停车场管理接口")
 public class ParkingLotController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ParkingLotController {
      * 分页查询停车场列表
      */
     @GetMapping
-    @ApiOperation("分页查询停车场")
+    @Operation(summary = "分页查询停车场")
     public Page<ParkingLot> list(
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "20") Integer size,
@@ -39,7 +39,7 @@ public class ParkingLotController {
      * 根据 ID 查询停车场详情
      */
     @GetMapping("/{id}")
-    @ApiOperation("查询停车场详情")
+    @Operation(summary = "查询停车场详情")
     public ParkingLot getById(@PathVariable Long id) {
         return parkingLotService.getById(id);
     }
@@ -48,7 +48,7 @@ public class ParkingLotController {
      * 创建停车场
      */
     @PostMapping
-    @ApiOperation("创建停车场")
+    @Operation(summary = "创建停车场")
     public boolean save(@RequestBody ParkingLot parkingLot) {
         return parkingLotService.save(parkingLot);
     }
@@ -57,7 +57,7 @@ public class ParkingLotController {
      * 更新停车场信息
      */
     @PutMapping("/{id}")
-    @ApiOperation("更新停车场")
+    @Operation(summary = "更新停车场")
     public boolean update(@PathVariable Long id, @RequestBody ParkingLot parkingLot) {
         parkingLot.setId(id);
         return parkingLotService.updateById(parkingLot);
@@ -67,7 +67,7 @@ public class ParkingLotController {
      * 删除停车场
      */
     @DeleteMapping("/{id}")
-    @ApiOperation("删除停车场")
+    @Operation(summary = "删除停车场")
     public boolean remove(@PathVariable Long id) {
         return parkingLotService.removeById(id);
     }

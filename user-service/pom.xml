@@ -22,17 +22,18 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         
+        <!-- 暂时禁用 Nacos，等待环境配置完成 -->
         <!-- Spring Cloud Alibaba Nacos Discovery -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
+        </dependency>-->
         
         <!-- Spring Cloud Alibaba Nacos Config -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
+        </dependency>-->
         
         <!-- PostgreSQL -->
         <dependency>
@@ -78,7 +79,14 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         
-        <!-- Test -->
+        <!-- Swagger (SpringDoc for Spring Boot 3.x) -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        
+        <!-- Tomcat Embed (提供 Servlet API) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

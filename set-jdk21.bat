@@ -5,7 +5,7 @@ echo ========================================
 echo.
 
 :: 设置 JDK 路径
-set JAVA_HOME=E:\java\jdk-21.0.10
+set JAVA_HOME=E:\java\jdk21
 set MAVEN_OPTS=-Djava.home=%JAVA_HOME%
 
 echo [√] JDK 路径已设置：%JAVA_HOME%
@@ -20,6 +20,8 @@ if errorlevel 1 (
     echo     路径：%JAVA_HOME%
 ) else (
     echo [√] Java 版本验证成功
+    echo.
+    echo JDK 路径已更正为：E:\java\jdk21
 )
 
 echo.

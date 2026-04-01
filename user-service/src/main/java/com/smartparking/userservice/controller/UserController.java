@@ -3,14 +3,14 @@ package com.smartparking.userservice.controller;
 import com.smartparking.userservice.dto.LoginRequest;
 import com.smartparking.userservice.dto.LoginResponse;
 import com.smartparking.userservice.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 用户控制器
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/auth")
-@Api(tags = "用户认证接口")
+@Tag(name = "用户认证接口")
 public class UserController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class UserController {
      * 用户登录
      */
     @PostMapping("/login")
-    @ApiOperation("用户登录")
+    @Operation(summary = "用户登录")
     public LoginResponse login(@RequestBody @Validated LoginRequest request) {
         return userService.login(request);
     }
@@ -40,7 +40,7 @@ public class UserController {
      * 用户登出
      */
     @PostMapping("/logout")
-    @ApiOperation("用户登出")
+    @Operation(summary = "用户登出")
     public void logout(@RequestHeader("Authorization") String token, HttpServletRequest request) {
         // 提取 Token (去掉 Bearer 前缀)
         String authHeader = request.getHeader("Authorization");

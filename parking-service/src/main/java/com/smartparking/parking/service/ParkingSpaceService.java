@@ -1,5 +1,6 @@
 package com.smartparking.parking.service;
 
+import com.smartparking.common.page.PageResult;
 import com.smartparking.parking.dto.*;
 
 import java.util.List;

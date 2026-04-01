@@ -2,7 +2,7 @@ package com.smartparking.userservice.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * 用户登录请求 DTO

@@ -1,9 +1,11 @@
 package com.smartparking.parking.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * 车位实体类
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
  * @since 1.0.0
  */
 @Data
+@Builder
 @TableName("parking_spaces")
 public class ParkingSpace {
 
@@ -55,6 +58,21 @@ public class ParkingSpace {
      * 限高 (厘米)
      */
     private Integer heightLimitCm;
+    
+    /**
+     * 位置信息 (JSON)
+     */
+    private Map<String, Object> locationInfo;
+
+    /**
+     * 是否充电车位
+     */
+    private Boolean isCharging;
+    
+    /**
+     * 充电设备 ID
+     */
+    private Long chargingDeviceId;
 
     /**
      * 占用车牌号
@@ -71,4 +89,10 @@ public class ParkingSpace {
      */
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
+    
+    /**
+     * 更新时间
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updatedAt;
 }
