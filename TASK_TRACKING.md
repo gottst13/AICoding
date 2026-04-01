@@ -205,9 +205,15 @@
 ## Sprint 4: 跨区与集成测试（Week 7-8）
 
 ### Task 4.1: 分区计费策略实现
-- **状态**: ⏹️ PENDING
+- **状态**: ✅ COMPLETE
+- **文件**: 
+  - `order-service/src/main/java/com/smartparking/order/service/fee/strategy/ZonedFeeStrategy.java`
+  - `order-service/src/test/java/com/smartparking/order/service/fee/strategy/ZonedFeeStrategyTest.java`
 - **预计工时**: 6 小时
-- **Git Commit**: 
+- **实际开始**: 2026-04-01
+- **实际完成**: 2026-04-01
+- **Git Commit**: `a320fc1` feat: 实现分区计费策略和单元测试（Task 4.1 完成）
+- **备注**: 支持跨区停车的分段计费，各区域独立计算费用
 
 ### Task 4.2: 车辆移动记录 Service
 - **状态**: ⏹️ PENDING
@@ -243,8 +249,8 @@
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
 | Sprint 2 | 6 | **6** | 0 | 0 | **100%** |
 | Sprint 3 | 6 | **6** | 0 | 0 | **100%** |
-| Sprint 4 | 6 | 0 | 0 | 6 | 0% |
-| **总计** | **21** | **15** | **0** | **6** | **71%** |
+| Sprint 4 | 6 | **1** | 0 | 5 | **17%** |
+| **总计** | **21** | **16** | **0** | **5** | **76%** |
 
 ---
 
