@@ -147,9 +147,19 @@
 - **备注**: 策略模式实现，支持免费时长、封顶价格
 
 ### Task 3.3: 计费规则配置 API
-- **状态**: ⏹️ PENDING
-- **预计工时**: 4 小时
-- **Git Commit**: 
+- **状态**: ✅ COMPLETE
+- **文件**: 
+  - `order-service/src/main/java/com/smartparking/order/entity/FeeRule.java`
+  - `order-service/src/main/java/com/smartparking/order/mapper/FeeRuleMapper.java`
+  - `order-service/src/main/java/com/smartparking/order/service/FeeRuleService.java`
+  - `order-service/src/main/java/com/smartparking/order/service/impl/FeeRuleServiceImpl.java`
+  - `order-service/src/main/java/com/smartparking/order/controller/FeeRuleController.java`
+  - DTO 类：CreateFeeRuleRequest, FeeRuleVO
+- **预计工时**: 6 小时
+- **实际开始**: 2026-04-01
+- **实际完成**: 2026-04-01
+- **Git Commit**: `35d6f20` feat: 创建计费规则配置 API（Task 3.3 完成）
+- **备注**: 完整的 CRUD 接口，支持统一计费和分区计费规则
 
 ### Task 3.4: 费用试算接口
 - **状态**: ⏹️ PENDING
@@ -208,9 +218,9 @@
 |--------|----------|--------|--------|--------|--------|
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
 | Sprint 2 | 6 | **6** | 0 | 0 | **100%** |
-| Sprint 3 | 6 | **2** | 0 | 4 | **33%** |
+| Sprint 3 | 6 | **3** | 0 | 3 | **50%** |
 | Sprint 4 | 6 | 0 | 0 | 6 | 0% |
-| **总计** | **21** | **11** | **0** | **10** | **52%** |
+| **总计** | **21** | **12** | **0** | **9** | **57%** |
 
 ---
 
