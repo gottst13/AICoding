@@ -243,9 +243,15 @@
 - **备注**: 支持订单创建、计费模式切换、分段费用计算
 
 ### Task 4.4: 全链路集成测试
-- **状态**: ⏹️ PENDING
+- **状态**: ✅ COMPLETE
+- **文件**: 
+  - `order-service/src/test/java/com/smartparking/order/integration/UnifiedFeeIntegrationTest.java`
+  - `order-service/src/test/java/com/smartparking/order/integration/ZonedFeeIntegrationTest.java`
 - **预计工时**: 8 小时
-- **Git Commit**: 
+- **实际开始**: 2026-04-01
+- **实际完成**: 2026-04-01
+- **Git Commit**: `95c6659` test: 添加全链路集成测试（Task 4.4 完成）
+- **备注**: 统一计费和分区计费的全流程验证，包括跨区停车场景
 
 ### Task 4.5: 性能测试与优化
 - **状态**: ⏹️ PENDING
@@ -266,8 +272,8 @@
 | Sprint 1 | 3 | **3** | 0 | 0 | **100%** |
 | Sprint 2 | 6 | **6** | 0 | 0 | **100%** |
 | Sprint 3 | 6 | **6** | 0 | 0 | **100%** |
-| Sprint 4 | 6 | **3** | 0 | 3 | **50%** |
-| **总计** | **21** | **18** | **0** | **3** | **86%** |
+| Sprint 4 | 6 | **4** | 0 | 2 | **67%** |
+| **总计** | **21** | **19** | **0** | **2** | **90%** |
 
 ---
 
