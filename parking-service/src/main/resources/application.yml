@@ -8,7 +8,7 @@ spring:
     name: parking-service
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:pg_parking}?currentSchema=public
+    url: jdbc:postgresql://${DB_HOST:pg-server}:${DB_PORT:5432}/${DB_NAME:pg_parking}?currentSchema=public
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres123}
     hikari:
