@@ -1,12 +1,12 @@
 package com.smartparking.order.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.smartparking.order.entity.OrderSegment;
+import com.smartparking.order.entity.TempOrder;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 订单分段 Mapper 接口
+ * 订单 Mapper 接口
  */
 @Mapper
-public interface OrderSegmentMapper extends BaseMapper<OrderSegment> {
+public interface TempOrderMapper extends BaseMapper<TempOrder> {
 }
