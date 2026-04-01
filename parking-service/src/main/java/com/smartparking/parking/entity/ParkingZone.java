@@ -1,85 +1,90 @@
 package com.smartparking.parking.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 /**
- * 停车场区域实体
+ * 停车区域实体类
+ * 
+ * @author Smart Parking Team
+ * @since 1.0.0
  */
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@TableName(value = "parking_zones", autoResultMap = true)
+@TableName("parking_zones")
 public class ParkingZone {
-    
-    @TableId(type = IdType.AUTO)
+
+    /**
+     * 区域 ID
+     */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
-    
-    @TableField("parking_lot_id")
+
+    /**
+     * 停车场 ID
+     */
     private Long parkingLotId;
-    
-    @TableField("parent_zone_id")
+
+    /**
+     * 父区域 ID (支持嵌套区域)
+     */
     private Long parentZoneId;
-    
-    @TableField("name")
+
+    /**
+     * 区域名称
+     */
     private String name;
-    
-    @TableField("code")
+
+    /**
+     * 区域编码
+     */
     private String code;
-    
+
     /**
-     * 区域类型：1-主区域 2-子区域
+     * 区域类型：1-一级区域 2-子区域
      */
-    @TableField("zone_type")
     private Integer zoneType;
-    
+
     /**
-     * 区域分类：1-商场区 2-办公区 3-酒店区 4-住宅区 5-充电区
+     * 区域类别：1-商场区 2-办公区 3-住宅区 4-充电区 5-其他
      */
-    @TableField("zone_category")
     private Integer zoneCategory;
-    
-    @TableField("floor_level")
+
+    /**
+     * 楼层 (-1 表示地下一层)
+     */
     private Integer floorLevel;
-    
-    @TableField("total_spaces")
+
+    /**
+     * 总车位数
+     */
     private Integer totalSpaces;
-    
-    @TableField("available_spaces")
+
+    /**
+     * 可用剩余车位数
+     */
     private Integer availableSpaces;
-    
+
     /**
      * 是否有独立出口
      */
-    @TableField("has_independent_exit")
     private Boolean hasIndependentExit;
-    
+
     /**
-     * 关联的出口车道 ID 列表
+     * 状态：0-停用 1-启用
      */
-    @TableField(value = "exit_lane_ids", typeHandler = JacksonTypeHandler.class)
-    private Long[] exitLaneIds;
-    
-    /**
-     * 状态：0-停用 1-启用 2-已满
-     */
-    @TableField("status")
     private Integer status;
-    
-    @TableField(value = "config", typeHandler = JacksonTypeHandler.class)
-    private Map<String, Object> config;
-    
-    @TableField(value = "created_at", fill = FieldFill.INSERT)
+
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
-    
-    @TableField(value = "updated_at", fill = FieldFill.INSERT_UPDATE)
+
+    /**
+     * 更新时间
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updatedAt;
 }

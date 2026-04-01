@@ -1,12 +1,12 @@
 package com.smartparking.parking.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.smartparking.parking.entity.ParkingZone;
+import com.smartparking.parking.entity.FeeRule;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 停车区域 Mapper 接口
+ * 收费规则 Mapper 接口
  */
 @Mapper
-public interface ParkingZoneMapper extends BaseMapper<ParkingZone> {
+public interface FeeRuleMapper extends BaseMapper<FeeRule> {
 }
